@@ -1,0 +1,52 @@
+name: LotteryItem
+main: me.old.li.Main
+version: 1.3
+author: [class70635,xgd]
+#depend: [Vault,NBT API]
+api-version: 1.13
+commands:
+  lotteryitem:
+    description: Basic commands.
+    aliases: [li]
+permissions:
+  lotteryitem.*:
+    description: Gives access to all lottery item.
+    children:
+      lotteryitem.commands.*: true
+      lotteryitem.tester: true
+  lotteryitem.commands.*:
+    description: Gives access to all lottery item commands.
+    children:
+      lotteryitem.commands.base: true
+      lotteryitem.commands.create: true
+      lotteryitem.commands.edit: true
+      lotteryitem.commands.get: true
+      lotteryitem.commands.remove: true
+      lotteryitem.commands.manager: true
+  lotteryitem.commands.base:
+    description: Show base commands.
+    default: op
+  lotteryitem.commands.create:
+    description: Create a new lottery item.
+    default: op
+  lotteryitem.commands.edit:
+    description: Edit a lottery item.
+    default: op
+  lotteryitem.commands.get:
+    description: Get a lottery item.
+    default: op
+  lotteryitem.commands.remove:
+    description: Remove a lottery item.
+    default: op
+  lotteryitem.commands.manager:
+    description: Open manager of lottery items.
+    default: op
+  lotteryitem.commands.refresh:
+    description: Refresh all lottery item on player's inventory.
+    default: op
+  lotteryitem.commands.reload:
+    description: Reload files.
+    default: op
+  lotteryitem.tester:
+    description: Interact a lottery item without remove item.
+    default: op    
