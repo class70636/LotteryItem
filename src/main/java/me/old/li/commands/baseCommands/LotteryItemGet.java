@@ -22,11 +22,11 @@ public class LotteryItemGet implements BaseCommand {
 	// {get,<id>}
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		Player p = (Player) sender;
-		if (!p.hasPermission("lotteryitem.commands.get")) {
-			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
-			return;
-		}
+//		Player p = (Player) sender;
+//		if (!p.hasPermission("lotteryitem.commands.get")) {
+//			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
+//			return;
+//		}
 		if (args.length == 1) {
 			showHelp(sender);
 			return;

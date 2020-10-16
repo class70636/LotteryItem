@@ -19,12 +19,12 @@ public class LotteryItemManager implements BaseCommand {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		Player p = (Player) sender;
-		if (!p.hasPermission("lotteryitem.commands.manager")) {
-			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
-			return;
-		}
+//		if (!p.hasPermission("lotteryitem.commands.manager")) {
+//			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
+//			return;
+//		}
 		ManagerPage mp = new ManagerPage(Config.GUI_MANAGER_TITLE, 6, instance);
-		mp.open((Player) sender);
+		mp.open(p);
 	}
 
 	@Override

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import me.old.li.Config;
 import me.old.li.LotteryItem;
@@ -23,11 +22,11 @@ public class LotteryItemRemove implements BaseCommand {
 
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		Player p = (Player) sender;
-		if (!p.hasPermission("lotteryitem.commands.remove")) {
-			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
-			return;
-		}
+//		Player p = (Player) sender;
+//		if (!p.hasPermission("lotteryitem.commands.remove")) {
+//			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
+//			return;
+//		}
 		if (args.length == 1) {
 			showHelp(sender);
 			return;

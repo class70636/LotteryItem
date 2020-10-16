@@ -12,10 +12,10 @@ public class LotteryItemRefresh implements BaseCommand {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		Player p = (Player) sender;
-		if (!p.hasPermission("lotteryitem.commands.refresh")) {
-			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
-			return;
-		}
+//		if (!p.hasPermission("lotteryitem.commands.refresh")) {
+//			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
+//			return;
+//		}
 		Utils.replaceAllPlayerLottery();
 		Utils.sendPluginMessage(p, Config.MESSAGE_REFRESH_SUCCESSFULLY);
 	}

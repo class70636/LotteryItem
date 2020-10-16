@@ -25,11 +25,11 @@ public class LotteryItemCreate implements BaseCommand {
 	// args = {create, <ID>}
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		Player p = (Player) sender;
-		if (!p.hasPermission("lotteryitem.commands.create")) {
-			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
-			return;
-		}
+//		Player p = (Player) sender;
+//		if (!p.hasPermission("lotteryitem.commands.create")) {
+//			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
+//			return;
+//		}
 		if (args.length == 1) {
 			showHelp(sender);
 			return;

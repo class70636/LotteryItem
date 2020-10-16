@@ -25,11 +25,11 @@ public class LotteryItemEdit implements BaseCommand {
 	// args = {edit, <id>}
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		Player p = (Player) sender;
-		if (!p.hasPermission("lotteryitem.commands.edit")) {
-			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
-			return;
-		}
+//		Player p = (Player) sender;
+//		if (!p.hasPermission("lotteryitem.commands.edit")) {
+//			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
+//			return;
+//		}
 		if (args.length == 1) {
 			showHelp(sender);
 			return;

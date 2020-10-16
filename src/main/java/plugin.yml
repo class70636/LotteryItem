@@ -35,6 +35,9 @@ permissions:
   lotteryitem.commands.get:
     description: Get a lottery item.
     default: op
+  lotteryitem.commands.give:
+    description: Give player a lottery item.
+    default: op
   lotteryitem.commands.remove:
     description: Remove a lottery item.
     default: op

@@ -65,8 +65,14 @@ public class Command implements CommandExecutor, TabCompleter {
 			showHelp(sender);
 			return true;
 		}
-		String index = args[0].equalsIgnoreCase("m") ? "manager" : args[0];
+		
+		String index = args[0].equalsIgnoreCase("m") ? "manager" : args[0].toLowerCase();
 		if (commands.get(index) != null) {
+			Player p = (Player) sender;
+			if (!p.hasPermission("lotteryitem.commands." + index)) {
+				p.sendMessage(Config.MESSAGE_NO_PERMISSION);
+				return true;
+			}
 			commands.get(index).execute(sender, args);
 			return true;
 		}

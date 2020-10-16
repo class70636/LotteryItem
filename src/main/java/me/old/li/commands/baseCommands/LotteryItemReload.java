@@ -18,10 +18,10 @@ public class LotteryItemReload implements BaseCommand {
 	@Override
 	public void execute(CommandSender sender, String[] args) {
 		Player p = (Player) sender;
-		if (!p.hasPermission("lotteryitem.commands.reload")) {
-			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
-			return;
-		}
+//		if (!p.hasPermission("lotteryitem.commands.reload")) {
+//			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
+//			return;
+//		}
 		// reload all
 		if (args.length == 1) {
 			Main.getInstance().reloadConfig();
