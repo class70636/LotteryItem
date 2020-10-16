@@ -31,4 +31,9 @@ public class LotteryItemManager implements BaseCommand {
 	public void showHelp(CommandSender sender) {
 	}
 
+	@Override
+	public String description() {
+		return " &3/li manager(m) &7-抽獎物管理介面";
+	}
+
 }

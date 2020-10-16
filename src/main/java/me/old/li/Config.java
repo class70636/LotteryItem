@@ -137,11 +137,11 @@ public class Config {
 	public static String MESSAGE_NO_SOUND_NAME;
 
 	// ===== COMMANDS
-	public static List<String> CMD_SHOW_HELP;
-	public static String CMD_CREATE_USAGE;
-	public static String CMD_EDIT_USAGE;
-	public static String CMD_GET_USAGE;
-	public static String CMD_REMOVE_USAGE;
-	public static String CMD_RELOAD_USAGE;
+//	public static List<String> CMD_SHOW_HELP;
+//	public static String CMD_CREATE_USAGE;
+//	public static String CMD_EDIT_USAGE;
+//	public static String CMD_GET_USAGE;
+//	public static String CMD_REMOVE_USAGE;
+//	public static String CMD_RELOAD_USAGE;
 
 }

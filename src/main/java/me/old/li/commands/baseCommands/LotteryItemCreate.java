@@ -49,7 +49,12 @@ public class LotteryItemCreate implements BaseCommand {
 
 	@Override
 	public void showHelp(CommandSender sender) {
-		Utils.sendPluginMessage(sender, Config.CMD_CREATE_USAGE);
+		Utils.sendPluginMessage(sender, "&cUsage: /li create <ID>");
+	}
+
+	@Override
+	public String description() {
+		return " &3/li create <ID> &7-創建抽獎物";
 	}
 
 }

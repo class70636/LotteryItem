@@ -10,7 +10,9 @@ public interface BaseCommand {
 	
 	public void showHelp(CommandSender sender);
 	
-	default public List<String> getCompleteList(String str) {
+	public String description();
+	
+	default public List<String> getCompleteList(String[] args) {
 		return null;
 	}
 

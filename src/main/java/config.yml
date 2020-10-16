@@ -304,19 +304,3 @@ reason:
   No_name: '&7- 抽獎物名稱（抽取物無名稱）'
   No_lore: '&7- 抽獎物敘述（已關閉添加獎品明細敘述及抽取物無敘述）'
   No_gifts: '&7- 抽獎物獎品（沒有獎品）'
-  
-# ----------- 指令 -----------
-cmd:
-  Show_help:
-  - ' &3/li create <ID> &7-創建抽獎物'
-  - ' &3/li edit <ID> &7-編輯抽獎物'
-  - ' &3/li remove <ID> &7-刪除抽獎物'
-  - ' &3/li get <ID> [amount] &7-取得抽獎物'
-  - ' &3/li manager(m) &7-抽獎物管理介面'
-  - ' &3/li refresh &7-重製所有玩家身上的抽獎物'
-  - ' &3/li reload [config|saves|items] &7-重新讀取檔案'
-  Create_usage: '&cUsage: /li create <ID>'
-  Edit_usage: '&cUsage: /li edit <ID>'
-  Get_usage: '&cUsage: /li get <ID> [amount]'
-  Remove_usage: '&cUsage: /li remove <ID>'
-  Reload_usage: '&cUsage: /li reload [config|saves|items]'

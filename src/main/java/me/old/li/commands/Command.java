@@ -3,7 +3,7 @@ package me.old.li.commands;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,10 +17,12 @@ import me.old.li.Main;
 import me.old.li.commands.baseCommands.LotteryItemCreate;
 import me.old.li.commands.baseCommands.LotteryItemEdit;
 import me.old.li.commands.baseCommands.LotteryItemGet;
+import me.old.li.commands.baseCommands.LotteryItemGive;
 import me.old.li.commands.baseCommands.LotteryItemManager;
 import me.old.li.commands.baseCommands.LotteryItemRefresh;
 import me.old.li.commands.baseCommands.LotteryItemReload;
 import me.old.li.commands.baseCommands.LotteryItemRemove;
+import net.md_5.bungee.api.ChatColor;
 
 public class Command implements CommandExecutor, TabCompleter {
 
@@ -30,15 +32,16 @@ public class Command implements CommandExecutor, TabCompleter {
 
 	public Command(Main instance) {
 		this.instance = instance;
-		this.commands = new HashMap<>();
+		this.commands = new LinkedHashMap<>();
 
 		commands.put("create", new LotteryItemCreate(instance));
 		commands.put("edit", new LotteryItemEdit(instance));
+		commands.put("get", new LotteryItemGet());
+		commands.put("give", new LotteryItemGive());
 		commands.put("remove", new LotteryItemRemove(instance));
 		commands.put("manager", new LotteryItemManager(instance));
-		commands.put("get", new LotteryItemGet());
-		commands.put("reload", new LotteryItemReload());
 		commands.put("refresh", new LotteryItemRefresh());
+		commands.put("reload", new LotteryItemReload());
 		try {
 			str = new String(
 					Base64.getDecoder().decode("wqc4ICAgICBbRGV2ZWxvcGVkIGJ5IGNsYXNzNzA2MzUsIHhnZCB8IHZlcnNpb24gJXNd"),
@@ -94,10 +97,14 @@ public class Command implements CommandExecutor, TabCompleter {
 			return list;
 		}
 		// type /li <selectors> {args}
-		else if (args.length == 2) {
+		else if (args.length >= 2) {
 			if (!commands.containsKey(args[0]))
 				return null;
-			return commands.get(args[0]).getCompleteList(args[1]);
+			String[] tempStr = new String[args.length - 1];
+			for (int i = 0; i < tempStr.length; i++) {
+				tempStr[i] = args[i + 1];
+			}
+			return commands.get(args[0]).getCompleteList(tempStr);
 		}
 		return null;
 	}
@@ -109,8 +116,8 @@ public class Command implements CommandExecutor, TabCompleter {
 			return;
 		}
 		sender.sendMessage(title);
-		for (String str : Config.CMD_SHOW_HELP)
-			sender.sendMessage(str);
+		for (BaseCommand bc : commands.values())
+			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', bc.description()));
 		sender.sendMessage(String.format(str, instance.getDescription().getVersion()));
 	}
 

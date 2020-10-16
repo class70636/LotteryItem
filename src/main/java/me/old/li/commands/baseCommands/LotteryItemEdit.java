@@ -22,11 +22,6 @@ public class LotteryItemEdit implements BaseCommand {
 		this.instance = instance;
 	}
 
-	@Override
-	public void showHelp(CommandSender sender) {
-		Utils.sendPluginMessage(sender, Config.CMD_EDIT_USAGE);
-	}
-
 	// args = {edit, <id>}
 	@Override
 	public void execute(CommandSender sender, String[] args) {
@@ -56,18 +51,31 @@ public class LotteryItemEdit implements BaseCommand {
 	}
 
 	@Override
-	public List<String> getCompleteList(String str) {
+	public List<String> getCompleteList(String[] args) {
 		List<String> idList = new ArrayList<>();
 		idList.addAll(Saves.getConfig().getKeys(false));
 		for (LotteryItem li : instance.getServerLotteryItems().getLotteryItems())
 			idList.add(li.getItemId());
 
-		List<String> list = new ArrayList<>();
-		for (String s : idList)
-			if (s.startsWith(str))
-				list.add(s);
+		if (args.length == 1) {
+			List<String> list = new ArrayList<>();
+			for (String s : idList)
+				if (s.startsWith(args[0]))
+					list.add(s);
 
-		return list;
+			return list;
+		}
+		return null;
+	}
+
+	@Override
+	public void showHelp(CommandSender sender) {
+		Utils.sendPluginMessage(sender, "&cUsage: /li edit <ID>");
+	}
+
+	@Override
+	public String description() {
+		return " &3/li edit <ID> &7-編輯抽獎物";
 	}
 
 }

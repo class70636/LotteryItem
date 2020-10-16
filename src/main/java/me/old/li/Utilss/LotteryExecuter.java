@@ -16,11 +16,12 @@ import me.old.li.LotteryItem;
 import me.old.li.Main;
 import me.old.li.optionObjects.Gift;
 import me.old.li.optionObjects.OptionObject;
-import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.ComponentBuilder.FormatRetention;
 import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.ItemTag;
 import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.hover.content.Item;
 
 public class LotteryExecuter {
 
@@ -127,8 +128,15 @@ public class LotteryExecuter {
 		ComponentBuilder cb = new ComponentBuilder(Config.SETTINGS_PLUGIN_PREFIX + " ");
 		for (String str : split) {
 			if (str.equals("{key}")) {
-				BaseComponent[] hoverEventComponents = new BaseComponent[] { new TextComponent(keyJson) };
-				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, hoverEventComponents);
+//				BaseComponent[] hoverEventComponents = new BaseComponent[] { new TextComponent(keyJson) };
+//				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, hoverEventComponents);
+
+//				Text t = new Text(new BaseComponent[] { new TextComponent(keyJson) });
+//				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, t);
+
+				Item it = new Item("minecraft:" + key.getType().toString().toLowerCase(), key.getAmount(),
+						ItemTag.ofNbt(keyJson));
+				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, it);
 
 				TextComponent component = new TextComponent(keyName);
 				component.setHoverEvent(event);
@@ -228,8 +236,13 @@ public class LotteryExecuter {
 		for (String str : split) {
 			// 替換抽獎物名字
 			if (str.equals("{li_name}")) {
-				BaseComponent[] hoverEventComponents = new BaseComponent[] { new TextComponent(lottery_item_json) };
-				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, hoverEventComponents);
+//				BaseComponent[] hoverEventComponents = new BaseComponent[] { new TextComponent(lottery_item_json) };
+//				Text t = new Text(new BaseComponent[] { new TextComponent(lottery_item_json) });
+//				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, t);
+
+				Item it = new Item("minecraft:" + lottery_item.getType().toString().toLowerCase(), lottery_item.getAmount(),
+						ItemTag.ofNbt(lottery_item_json));
+				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, it);
 
 				TextComponent component = new TextComponent(lotteryName);
 				component.setHoverEvent(event);
@@ -239,8 +252,13 @@ public class LotteryExecuter {
 			}
 			// 替換獎品名字
 			if (str.equals("{gift_name}")) {
-				BaseComponent[] hoverEventComponents = new BaseComponent[] { new TextComponent(gift_item_json) };
-				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, hoverEventComponents);
+//				BaseComponent[] hoverEventComponents = new BaseComponent[] { new TextComponent(gift_item_json) };
+//				Text t = new Text(new BaseComponent[] { new TextComponent(gift_item_json) });
+//				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, t);
+
+				Item it = new Item("minecraft:" + gift_item.getType().toString().toLowerCase(), gift_item.getAmount(),
+						ItemTag.ofNbt(gift_item_json));
+				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, it);
 
 				TextComponent component = new TextComponent(giftName);
 				component.setHoverEvent(event);
@@ -279,8 +297,13 @@ public class LotteryExecuter {
 
 		for (String str : split) {
 			if (str.equals("{gift_name}")) {
-				BaseComponent[] hoverEventComponents = new BaseComponent[] { new TextComponent(itemJson) };
-				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, hoverEventComponents);
+//				BaseComponent[] hoverEventComponents = new BaseComponent[] { new TextComponent(itemJson) };
+//				Text t = new Text(new BaseComponent[] { new TextComponent(itemJson) });
+//				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, t);
+
+				Item it = new Item("minecraft:" + item.getType().toString().toLowerCase(), item.getAmount(),
+						ItemTag.ofNbt(itemJson));
+				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, it);
 
 				TextComponent component = new TextComponent(giftName);
 				component.setHoverEvent(event);
@@ -318,8 +341,13 @@ public class LotteryExecuter {
 
 		for (String str : split) {
 			if (str.equals("{li_name}")) {
-				BaseComponent[] hoverEventComponents = new BaseComponent[] { new TextComponent(itemJson) };
-				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, hoverEventComponents);
+//				BaseComponent[] hoverEventComponents = new BaseComponent[] { new TextComponent(itemJson) };
+//				Text t = new Text(new BaseComponent[] { new TextComponent(itemJson) });
+//				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, hoverEventComponents);
+
+				Item it = new Item("minecraft:" + item.getType().toString().toLowerCase(), item.getAmount(),
+						ItemTag.ofNbt(itemJson));
+				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, it);
 
 				TextComponent component = new TextComponent(lotteryName);
 				component.setHoverEvent(event);

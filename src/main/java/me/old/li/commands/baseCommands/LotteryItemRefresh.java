@@ -25,4 +25,9 @@ public class LotteryItemRefresh implements BaseCommand {
 
 	}
 
+	@Override
+	public String description() {
+		return " &3/li refresh &7-重製所有玩家身上的抽獎物";
+	}
+
 }

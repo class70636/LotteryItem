@@ -48,18 +48,26 @@ public class LotteryItemGet implements BaseCommand {
 	}
 
 	@Override
-	public void showHelp(CommandSender sender) {
-		Utils.sendPluginMessage(sender, Config.CMD_GET_USAGE);
+	public List<String> getCompleteList(String[] args) {
+		if (args.length == 1) {
+			List<String> list = new ArrayList<>();
+			for (String key : Saves.getConfig().getKeys(false)) {
+				if (key.startsWith(args[0]))
+					list.add(key);
+			}
+			return list;
+		}
+		return null;
 	}
 
 	@Override
-	public List<String> getCompleteList(String str) {
-		List<String> list = new ArrayList<>();
-		for (String key : Saves.getConfig().getKeys(false)) {
-			if (key.startsWith(str))
-				list.add(key);
-		}
-		return list;
+	public void showHelp(CommandSender sender) {
+		Utils.sendPluginMessage(sender, "&cUsage: /li get <ID> [amount]");
+	}
+
+	@Override
+	public String description() {
+		return " &3/li get <ID> [amount] &7-取得抽獎物";
 	}
 
 }

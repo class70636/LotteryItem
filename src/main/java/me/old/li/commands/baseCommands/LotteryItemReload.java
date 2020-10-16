@@ -56,17 +56,25 @@ public class LotteryItemReload implements BaseCommand {
 
 	@Override
 	public void showHelp(CommandSender sender) {
-		Utils.sendPluginMessage(sender, Config.CMD_RELOAD_USAGE);
+		Utils.sendPluginMessage(sender, "&cUsage: /li reload [config|saves|items]");
 	}
 
 	@Override
-	public List<String> getCompleteList(String str) {
-		String[] args = { "config", "saves", "items" };
-		List<String> list = new ArrayList<>();
-		for (String s : args)
-			if (s.startsWith(str.toLowerCase()))
-				list.add(s);
-		return list;
+	public List<String> getCompleteList(String[] str) {
+		if (str.length == 1) {
+			String[] args = { "config", "saves", "items" };
+			List<String> list = new ArrayList<>();
+			for (String s : args)
+				if (s.startsWith(str[0].toLowerCase()))
+					list.add(s);
+			return list;
+		}
+		return null;
+	}
+
+	@Override
+	public String description() {
+		return " &3/li reload [config|saves|items] &7-重新讀取檔案";
 	}
 
 }

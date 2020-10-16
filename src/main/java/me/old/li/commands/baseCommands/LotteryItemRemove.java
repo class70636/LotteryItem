@@ -52,22 +52,30 @@ public class LotteryItemRemove implements BaseCommand {
 
 	@Override
 	public void showHelp(CommandSender sender) {
-		Utils.sendPluginMessage(sender, Config.CMD_REMOVE_USAGE);
+		Utils.sendPluginMessage(sender, "&cUsage: /li remove <ID>");
 	}
 
 	@Override
-	public List<String> getCompleteList(String str) {
+	public List<String> getCompleteList(String[] str) {
 		List<String> idList = new ArrayList<>();
 		idList.addAll(Saves.getConfig().getKeys(false));
 		for (LotteryItem li : instance.getServerLotteryItems().getLotteryItems())
 			idList.add(li.getItemId());
 
-		List<String> list = new ArrayList<>();
-		for (String s : idList)
-			if (s.startsWith(str))
-				list.add(s);
+		if (str.length == 1) {
+			List<String> list = new ArrayList<>();
+			for (String s : idList)
+				if (s.startsWith(str[0]))
+					list.add(s);
 
-		return list;
+			return list;
+		}
+		return null;
+	}
+
+	@Override
+	public String description() {
+		return " &3/li remove <ID> &7-刪除抽獎物";
 	}
 
 }

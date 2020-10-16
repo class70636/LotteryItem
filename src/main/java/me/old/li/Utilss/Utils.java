@@ -1,11 +1,9 @@
 package me.old.li.Utilss;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,7 +24,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 public class Utils {
 
 	public static void sendPluginMessage(CommandSender sender, String message) {
-		sender.sendMessage(Config.SETTINGS_PLUGIN_PREFIX + " §r" + message);
+		sender.sendMessage(Config.SETTINGS_PLUGIN_PREFIX + " §r" + ChatColor.translateAlternateColorCodes('&', message));
 	}
 
 	public static void sendActionBar(Player p, String message) {
@@ -153,29 +151,34 @@ public class Utils {
 		return nbti.getString("liKey");
 	}
 
-	public static String transItemToJson(ItemStack itemStack) {
-		Class<?> craftItemStackClazz = ReflectionUtil.getOBCClass("inventory.CraftItemStack");
-		Method asNMSCopyMethod = ReflectionUtil.getMethod(craftItemStackClazz, "asNMSCopy", ItemStack.class);
+//	public static String transItemToJson(ItemStack itemStack) {
+//		Class<?> craftItemStackClazz = ReflectionUtil.getOBCClass("inventory.CraftItemStack");
+//		Method asNMSCopyMethod = ReflectionUtil.getMethod(craftItemStackClazz, "asNMSCopy", ItemStack.class);
+//
+//		Class<?> nmsItemStackClazz = ReflectionUtil.getNMSClass("ItemStack");
+//		Class<?> nbtTagCompoundClazz = ReflectionUtil.getNMSClass("NBTTagCompound");
+//		Method saveNmsItemStackMethod = ReflectionUtil.getMethod(nmsItemStackClazz, "save", nbtTagCompoundClazz);
+//
+//		Object nmsNbtTagCompoundObj;
+//		Object nmsItemStackObj;
+//		Object itemAsJsonObject;
+//
+//		try {
+//			nmsNbtTagCompoundObj = nbtTagCompoundClazz.newInstance();
+//			nmsItemStackObj = asNMSCopyMethod.invoke(null, itemStack);
+//			itemAsJsonObject = saveNmsItemStackMethod.invoke(nmsItemStackObj, nmsNbtTagCompoundObj);
+//		} catch (Throwable t) {
+//			Bukkit.getLogger().log(Level.SEVERE, "failed to serialize itemstack to nms item", t);
+//			return null;
+//		}
+//
+//		// Return a string representation of the serialized object
+//		return itemAsJsonObject.toString();
+//	}
 
-		Class<?> nmsItemStackClazz = ReflectionUtil.getNMSClass("ItemStack");
-		Class<?> nbtTagCompoundClazz = ReflectionUtil.getNMSClass("NBTTagCompound");
-		Method saveNmsItemStackMethod = ReflectionUtil.getMethod(nmsItemStackClazz, "save", nbtTagCompoundClazz);
-
-		Object nmsNbtTagCompoundObj;
-		Object nmsItemStackObj;
-		Object itemAsJsonObject;
-
-		try {
-			nmsNbtTagCompoundObj = nbtTagCompoundClazz.newInstance();
-			nmsItemStackObj = asNMSCopyMethod.invoke(null, itemStack);
-			itemAsJsonObject = saveNmsItemStackMethod.invoke(nmsItemStackObj, nmsNbtTagCompoundObj);
-		} catch (Throwable t) {
-			Bukkit.getLogger().log(Level.SEVERE, "failed to serialize itemstack to nms item", t);
-			return null;
-		}
-
-		// Return a string representation of the serialized object
-		return itemAsJsonObject.toString();
+	public static String transItemToJson(ItemStack item) {
+		NBTItem nbti = new NBTItem(item);
+		return nbti.toString();
 	}
 
 }
