@@ -12,7 +12,7 @@ import java.util.List;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import de.tr7zw.changeme.nbtapi.NBTItem;
+import de.tr7zw.nbtapi.NBTItem;
 import me.old.li.Config;
 import me.old.li.LotteryItem;
 import me.old.li.optionObjects.Gift;

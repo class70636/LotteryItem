@@ -113,6 +113,9 @@ public class Config {
 	
 	public static String BUTTON_SET_SOUND_NAME;
 	public static List<String> BUTTON_SET_SOUND_LORE;
+	
+	public static String BUTTON_NEXT_LI_PAGE_NAME;
+	public static String BUTTON_PRE_LI_PAGE_NAME;
 
 	// messages
 	public static String MESSAGE_LOTTERYITEM_EXISTS;

@@ -16,7 +16,7 @@ public class Saves {
 
 	public static void reloadConfig() {
 		if (customConfigFile == null) {
-			customConfigFile = new File(Main.getInstance().getDataFolder(), "saves.yml");
+			customConfigFile = new File(Main.getInstance().getDataFolder() + "/files/", "saves.yml");
 		}
 		if (!customConfigFile.exists()) {
 			saveDefaultConfig();

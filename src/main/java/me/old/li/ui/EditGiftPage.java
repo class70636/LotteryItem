@@ -14,7 +14,6 @@ import me.old.li.Config;
 import me.old.li.InputType;
 import me.old.li.Utilss.ItemBuilder;
 import me.old.li.Utilss.Utils;
-import me.old.li.Utilss.XMaterial;
 import me.old.li.optionObjects.Gift;
 import me.old.li.optionObjects.Money;
 
@@ -214,8 +213,7 @@ public class EditGiftPage extends Page {
 			}
 			lore.add(str);
 		}
-		return new ItemBuilder(XMaterial.REDSTONE_TORCH.parseMaterial(), Config.BUTTON_SET_GIFT_AMOUNT_NAME, lore)
-				.getItem();
+		return new ItemBuilder(Material.REDSTONE_TORCH, Config.BUTTON_SET_GIFT_AMOUNT_NAME, lore).getItem();
 	}
 
 	private void setSetChanceButton() {
@@ -293,7 +291,7 @@ public class EditGiftPage extends Page {
 
 	private ItemStack getSetBroadcastItem() {
 		ItemBuilder ib = new ItemBuilder();
-		ib.setMaterial(gift.getBroadcast() ? XMaterial.LIME_WOOL.parseMaterial() : XMaterial.RED_WOOL.parseMaterial());
+		ib.setMaterial(gift.getBroadcast() ? Material.LIME_WOOL : Material.RED_WOOL);
 		ib.setName(Config.BUTTON_SET_GIFT_BROADCAST_NAME);
 		ib.setLore(Config.BUTTON_SET_GIFT_BROADCAST_LORE);
 		return ib.getItem();
@@ -309,8 +307,8 @@ public class EditGiftPage extends Page {
 
 				@Override
 				protected void setDisplayItem() {
-					this.display = new ItemBuilder(XMaterial.WHITE_STAINED_GLASS_PANE.parseMaterial(),
-							Config.BUTTON_NOTUSE_NAME).getItem();
+					this.display = new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE, Config.BUTTON_NOTUSE_NAME)
+							.getItem();
 				}
 			};
 		}

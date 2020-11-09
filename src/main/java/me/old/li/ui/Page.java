@@ -16,7 +16,6 @@ import me.old.li.Config;
 import me.old.li.InputType;
 import me.old.li.LotteryItem;
 import me.old.li.Main;
-import me.old.li.Utilss.XMaterial;
 
 public class Page {
 
@@ -147,7 +146,7 @@ public class Page {
 
 			@Override
 			Material getMaterial() {
-				return XMaterial.CHEST_MINECART.parseMaterial();
+				return Material.CHEST_MINECART;
 			}
 
 			@Override

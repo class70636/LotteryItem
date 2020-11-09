@@ -2,8 +2,10 @@ package me.old.li.ui;
 
 import org.bukkit.event.inventory.InventoryCloseEvent;
 
+import me.old.li.Config;
 import me.old.li.LotteryItem;
 import me.old.li.Main;
+import me.old.li.Utilss.Utils;
 import me.old.li.files.Saves;
 
 public class DeleteLotteryItemConfirm extends DeleteConfirmPage {
@@ -18,6 +20,7 @@ public class DeleteLotteryItemConfirm extends DeleteConfirmPage {
 	@Override
 	public void onClose(InventoryCloseEvent e) {
 		if (confirm) {
+			Utils.sendPluginMessage(p, Config.MESSAGE_LOTTERYITEM_REMOVED.replace("{id}", li.getItemId()));
 			if (Saves.getConfig().contains(li.getItemId())) {
 				Saves.getConfig().set(li.getItemId(), null);
 				Saves.saveConfig();

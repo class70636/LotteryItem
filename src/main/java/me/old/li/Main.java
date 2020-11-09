@@ -17,6 +17,7 @@ import me.old.li.Utilss.Utils;
 import me.old.li.commands.Command;
 import me.old.li.files.Items;
 import me.old.li.files.Saves;
+import me.old.li.files.Strings;
 import me.old.li.optionObjects.Consoprize;
 import me.old.li.optionObjects.Gift;
 import me.old.li.optionObjects.Key;
@@ -56,23 +57,29 @@ public class Main extends JavaPlugin implements Listener {
 
 		// Hook depen plugins
 		if (!Hooker.setupEconomy()) {
-			getLogger().severe("\033[33m您的伺服器未安裝經濟插件，插件未開啟。\033[m");
+			getLogger().severe("\033[31m您的伺服器未安裝經濟插件，插件未開啟。\033[m");
 			getServer().getPluginManager().disablePlugin(this);
 			return;
 		}
 		Hooker.setupPermissions();
-//		// Check nbt api
-//		if (getServer().getPluginManager().getPlugin("ItemNBTAPI") == null) {
-//			getLogger().severe("\033[33m您的伺服器未安裝NbtApi插件，插件未開啟。\033[m");
-//			getServer().getPluginManager().disablePlugin(this);
-//			return;
-//		}
+		// Check nbt api
+		if (getServer().getPluginManager().getPlugin("NBTAPI") == null) {
+			getLogger().severe("\033[31m您的伺服器未安裝NBTAPI插件，插件未開啟。\033[m");
+			getServer().getPluginManager().disablePlugin(this);
+			return;
+		}
 		// 讀取config
 		File config = new File(getDataFolder(), "config.yml");
 		if (!config.exists())
 			saveDefaultConfig();
 		reloadConfig();
 
+		// 創建資料夾
+		File folder = new File(getDataFolder() + "/files/");
+		if (!folder.exists())
+			folder.mkdir();
+
+		Strings.reloadConfig();
 		Utils.loadConfig(Config.class);
 
 		// 註冊gui api

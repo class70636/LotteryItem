@@ -12,19 +12,21 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import de.tr7zw.changeme.nbtapi.NBTItem;
+import de.tr7zw.nbtapi.NBTItem;
 import me.old.li.Config;
 import me.old.li.LotteryItem;
 import me.old.li.Main;
 import me.old.li.files.Items;
 import me.old.li.files.Saves;
+import me.old.li.files.Strings;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 
 public class Utils {
 
 	public static void sendPluginMessage(CommandSender sender, String message) {
-		sender.sendMessage(Config.SETTINGS_PLUGIN_PREFIX + " §r" + ChatColor.translateAlternateColorCodes('&', message));
+		sender.sendMessage(
+				Config.SETTINGS_PLUGIN_PREFIX + " §r" + ChatColor.translateAlternateColorCodes('&', message));
 	}
 
 	public static void sendActionBar(Player p, String message) {
@@ -43,6 +45,23 @@ public class Utils {
 				Field f = clazz.getDeclaredField(temp);
 				try {
 					Object o = transColor(Main.getInstance().getConfig().get(key));
+					f.set(new Config(), o);
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					continue;
+				}
+			} catch (NoSuchFieldException | SecurityException e) {
+				// e.printStackTrace();
+				continue;
+			}
+		}
+
+		for (String key : Strings.getConfig().getKeys(true)) {
+			String temp = key.toUpperCase().replace(".", "_");
+			try {
+				Field f = clazz.getDeclaredField(temp);
+				try {
+					Object o = transColor(Strings.getConfig().get(key));
 					f.set(new Config(), o);
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					// TODO Auto-generated catch block
@@ -131,6 +150,9 @@ public class Utils {
 				if (Utils.isNullableItem(is))
 					continue;
 				if (!LIApi.isLotteryItem(is))
+					continue;
+				String liKey = Utils.getLiKey(is);
+				if (!Saves.getConfig().contains(liKey))
 					continue;
 
 				String key = Utils.getLiKey(is);

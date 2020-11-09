@@ -2,7 +2,7 @@ package me.old.li.Utilss;
 
 import org.bukkit.inventory.ItemStack;
 
-import de.tr7zw.changeme.nbtapi.NBTItem;
+import de.tr7zw.nbtapi.NBTItem;
 import me.old.li.LotteryItem;
 import me.old.li.Main;
 import me.old.li.files.Saves;
@@ -34,10 +34,7 @@ public class LIApi {
 
 	public static boolean isLotteryItem(ItemStack is) {
 		NBTItem nbti = new NBTItem(is);
-		if (!nbti.hasKey("liKey"))
-			return false;
-		String key = nbti.getString("liKey");
-		return Saves.getConfig().contains(key);
+		return nbti.hasKey("liKey");
 	}
 
 }

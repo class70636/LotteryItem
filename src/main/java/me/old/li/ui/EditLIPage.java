@@ -18,7 +18,6 @@ import me.old.li.Main;
 import me.old.li.Utilss.ItemBuilder;
 import me.old.li.Utilss.LIApi;
 import me.old.li.Utilss.Utils;
-import me.old.li.Utilss.XMaterial;
 import me.old.li.files.Saves;
 import me.old.li.optionObjects.Consoprize;
 import me.old.li.optionObjects.Gift;
@@ -103,8 +102,7 @@ public class EditLIPage extends Page {
 				List<String> lore = new ArrayList<>();
 				for (String str : Config.BUTTON_SHOW_ID_LORE)
 					lore.add(str.replace("{id}", getLotteryItem().getItemId()));
-				ItemStack icon = new ItemBuilder(XMaterial.WRITABLE_BOOK.parseMaterial(), Config.BUTTON_SHOW_ID_NAME,
-						lore).getItem();
+				ItemStack icon = new ItemBuilder(Material.WRITABLE_BOOK, Config.BUTTON_SHOW_ID_NAME, lore).getItem();
 				this.display = icon;
 			}
 		};
@@ -457,7 +455,7 @@ public class EditLIPage extends Page {
 		for (String str : Config.BUTTON_SET_CD_LORE)
 			lore.add(str.replace("{cd}", page.getLotteryItem().getCoolDown() + ""));
 
-		return new ItemBuilder(XMaterial.CLOCK.parseMaterial(), Config.BUTTON_SET_CD_NAME, lore).getItem();
+		return new ItemBuilder(Material.CLOCK, Config.BUTTON_SET_CD_NAME, lore).getItem();
 	}
 
 	private void setPeriodButton() {
@@ -580,9 +578,7 @@ public class EditLIPage extends Page {
 
 	private ItemStack getSetAddGiftsItem() {
 		ItemBuilder ib = new ItemBuilder();
-		ib.setMaterial(page.getLotteryItem().isAddGiftsLore() ? XMaterial.LIME_WOOL.parseMaterial()
-				: XMaterial.RED_WOOL.parseMaterial());
-//		ib.setMaterial(page.getLotteryItem().isAddGiftsLore() ? Material.LIME_WOOL : Material.RED_WOOL);
+		ib.setMaterial(page.getLotteryItem().isAddGiftsLore() ? Material.LIME_WOOL : Material.RED_WOOL);
 		ib.setName(Config.BUTTON_SET_ADD_GIFTS_LORE_NAME);
 		ib.setLore(Config.BUTTON_SET_ADD_GIFTS_LORE_LORE);
 		return ib.getItem();
@@ -614,8 +610,7 @@ public class EditLIPage extends Page {
 
 	private ItemStack getSingleExtractItem() {
 		ItemBuilder ib = new ItemBuilder();
-		ib.setMaterial(page.getLotteryItem().isSingleExtract() ? XMaterial.LIME_WOOL.parseMaterial()
-				: XMaterial.RED_WOOL.parseMaterial());
+		ib.setMaterial(page.getLotteryItem().isSingleExtract() ? Material.LIME_WOOL : Material.RED_WOOL);
 		ib.setName(Config.BUTTON_SET_SINGLE_EXTRACT_NAME);
 		ib.setLore(Config.BUTTON_SET_SINGLE_EXTRACT_LORE);
 		return ib.getItem();
@@ -646,8 +641,7 @@ public class EditLIPage extends Page {
 
 	private ItemStack getRandomExtractItem() {
 		ItemBuilder ib = new ItemBuilder();
-		ib.setMaterial(page.getLotteryItem().isRandomExtract() ? XMaterial.LIME_WOOL.parseMaterial()
-				: XMaterial.RED_WOOL.parseMaterial());
+		ib.setMaterial(page.getLotteryItem().isRandomExtract() ? Material.LIME_WOOL : Material.RED_WOOL);
 		ib.setName(Config.BUTTON_SET_RANDOM_EXTRACT_NAME);
 		ib.setLore(Config.BUTTON_SET_RANDOM_EXTRACT_LORE);
 		return ib.getItem();
@@ -680,8 +674,7 @@ public class EditLIPage extends Page {
 
 	private ItemStack getSelectableItem() {
 		ItemBuilder ib = new ItemBuilder();
-		ib.setMaterial(page.getLotteryItem().isSelectable() ? XMaterial.LIME_WOOL.parseMaterial()
-				: XMaterial.RED_WOOL.parseMaterial());
+		ib.setMaterial(page.getLotteryItem().isSelectable() ? Material.LIME_WOOL : Material.RED_WOOL);
 		ib.setName(Config.BUTTON_SET_SELECTABLE_NAME);
 		ib.setLore(Config.BUTTON_SET_SELECTABLE_LORE);
 		return ib.getItem();
@@ -698,8 +691,8 @@ public class EditLIPage extends Page {
 
 				@Override
 				protected void setDisplayItem() {
-					this.display = new ItemBuilder(XMaterial.WHITE_STAINED_GLASS_PANE.parseMaterial(),
-							Config.BUTTON_NOTUSE_NAME).getItem();
+					this.display = new ItemBuilder(Material.WHITE_STAINED_GLASS_PANE, Config.BUTTON_NOTUSE_NAME)
+							.getItem();
 				}
 			};
 		}
@@ -716,7 +709,7 @@ public class EditLIPage extends Page {
 
 				@Override
 				protected void setDisplayItem() {
-					this.display = new ItemBuilder(XMaterial.BLACK_STAINED_GLASS_PANE.parseMaterial(), " ").getItem();
+					this.display = new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE, " ").getItem();
 				}
 			};
 		}

@@ -1,11 +1,11 @@
 package me.old.li.ui;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
 import me.old.li.Config;
 import me.old.li.Utilss.ItemBuilder;
-import me.old.li.Utilss.XMaterial;
 
 public class DeleteConfirmPage extends Page {
 
@@ -36,7 +36,7 @@ public class DeleteConfirmPage extends Page {
 
 			@Override
 			protected void setDisplayItem() {
-				this.display = new ItemBuilder(XMaterial.LIME_WOOL.parseMaterial(), Config.BUTTON_CONFIRM_NAME,
+				this.display = new ItemBuilder(Material.LIME_WOOL, Config.BUTTON_CONFIRM_NAME,
 						Config.BUTTON_CONFIRM_LORE).getItem();
 			}
 		};
@@ -52,7 +52,7 @@ public class DeleteConfirmPage extends Page {
 
 				@Override
 				protected void setDisplayItem() {
-					this.display = new ItemBuilder(XMaterial.BLACK_STAINED_GLASS_PANE.parseMaterial(), " ").getItem();
+					this.display = new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE, " ").getItem();
 				}
 			};
 		}

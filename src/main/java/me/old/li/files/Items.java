@@ -15,7 +15,7 @@ public class Items {
 
 	public static void reloadConfig() {
 		if (customConfigFile == null) {
-			customConfigFile = new File(Main.getInstance().getDataFolder(), "items.yml");
+			customConfigFile = new File(Main.getInstance().getDataFolder() + "/files/", "items.yml");
 		}
 		if (!customConfigFile.exists()) {
 			saveDefaultConfig();

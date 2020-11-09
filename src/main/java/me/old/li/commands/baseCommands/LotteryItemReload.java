@@ -12,6 +12,7 @@ import me.old.li.Utilss.Utils;
 import me.old.li.commands.BaseCommand;
 import me.old.li.files.Items;
 import me.old.li.files.Saves;
+import me.old.li.files.Strings;
 
 public class LotteryItemReload implements BaseCommand {
 
@@ -51,18 +52,25 @@ public class LotteryItemReload implements BaseCommand {
 			Utils.replaceAllPlayerLottery();
 			return;
 		}
+		if (args[1].equalsIgnoreCase("strings")) {
+			Strings.reloadConfig();
+			Utils.loadConfig(Config.class);
+			Utils.sendPluginMessage(p, Config.MESSAGE_RELOAD_SUCCESSFULLY);
+			Utils.replaceAllPlayerLottery();
+			return;
+		}
 		showHelp(p);
 	}
 
 	@Override
 	public void showHelp(CommandSender sender) {
-		Utils.sendPluginMessage(sender, "&cUsage: /li reload [config|saves|items]");
+		Utils.sendPluginMessage(sender, "&cUsage: /li reload [config|saves|items|strings]");
 	}
 
 	@Override
 	public List<String> getCompleteList(String[] str) {
 		if (str.length == 1) {
-			String[] args = { "config", "saves", "items" };
+			String[] args = { "config", "saves", "items", "strings" };
 			List<String> list = new ArrayList<>();
 			for (String s : args)
 				if (s.startsWith(str[0].toLowerCase()))
@@ -74,7 +82,7 @@ public class LotteryItemReload implements BaseCommand {
 
 	@Override
 	public String description() {
-		return " &3/li reload [config|saves|items] &7-重新讀取檔案";
+		return " &3/li reload [config|saves|items|strings] &7-重新讀取檔案";
 	}
 
 }
