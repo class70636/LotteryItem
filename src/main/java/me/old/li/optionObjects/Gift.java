@@ -20,12 +20,14 @@ public class Gift extends OptionObject implements ConfigurationSerializable, Com
 	private String amount;
 	private double chance;
 	private boolean broadcast;
+	private String sound;
 
 	public Gift() {
 		super();
 		this.amount = null;
 		this.chance = 0;
 		this.broadcast = false;
+		this.sound = null;
 	}
 
 	@Override
@@ -49,6 +51,7 @@ public class Gift extends OptionObject implements ConfigurationSerializable, Com
 		sb.append(",amount=" + amount);
 		sb.append(",chance=" + chance);
 		sb.append(",broadcast=" + broadcast);
+		sb.append(",sound=" + sound);
 		return sb.toString();
 	}
 
@@ -64,6 +67,7 @@ public class Gift extends OptionObject implements ConfigurationSerializable, Com
 		this.amount = (String) map.get("amount");
 		this.chance = (double) map.get("chance");
 		this.broadcast = (boolean) map.get("broadcast");
+		this.sound = (String) map.get("sound");
 	}
 
 	@Override
@@ -73,6 +77,7 @@ public class Gift extends OptionObject implements ConfigurationSerializable, Com
 		map.put("amount", this.amount);
 		map.put("chance", this.chance);
 		map.put("broadcast", this.broadcast);
+		map.put("sound", this.sound);
 		return map;
 	}
 
@@ -106,6 +111,18 @@ public class Gift extends OptionObject implements ConfigurationSerializable, Com
 
 	public void setBroadcast(boolean b) {
 		this.broadcast = b;
+	}
+
+	public String getSound() {
+		return this.sound;
+	}
+
+	public void setSound(String sound) {
+		this.sound = sound;
+	}
+
+	public boolean hasSoundSet() {
+		return this.sound != null;
 	}
 
 	public String getItemDisplay() {

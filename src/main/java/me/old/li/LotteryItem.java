@@ -33,7 +33,6 @@ public class LotteryItem implements ConfigurationSerializable, Cloneable, Compar
 
 	private boolean addGiftsLore;
 	private boolean singleExtract;
-	private boolean randomExtract;
 	private boolean selectable;
 
 	private List<Gift> gifts;
@@ -49,7 +48,7 @@ public class LotteryItem implements ConfigurationSerializable, Cloneable, Compar
 		this.periodOfUse = null;
 		this.soundSet = null;
 		this.addGiftsLore = true;
-		this.singleExtract = this.randomExtract = this.selectable = false;
+		this.singleExtract = this.selectable = false;
 		this.gifts = new ArrayList<>();
 	}
 
@@ -82,11 +81,9 @@ public class LotteryItem implements ConfigurationSerializable, Cloneable, Compar
 		sb.append(",h=" + (this.hasPeriodOfUse() ? periodOfUse : "null"));
 		sb.append(",i=" + addGiftsLore);
 		sb.append(",j=" + singleExtract);
-		sb.append(",k=" + randomExtract);
-		sb.append(",l=" + gifts.toString());
-		sb.append(",m=" + (this.hasSoundSet() ? soundSet : "null"));
-		sb.append(",n=" + selectable);
-//		System.out.println(gifts.toString());
+		sb.append(",k=" + gifts.toString());
+		sb.append(",l=" + (this.hasSoundSet() ? soundSet : "null"));
+		sb.append(",m=" + selectable);
 		return sb.toString();
 	}
 
@@ -108,7 +105,7 @@ public class LotteryItem implements ConfigurationSerializable, Cloneable, Compar
 		this.soundSet = (String) map.get("soundSet");
 		this.addGiftsLore = (boolean) map.get("addGiftsLore");
 		this.singleExtract = (boolean) map.get("singleExtract");
-		this.randomExtract = (boolean) map.get("randomExtract");
+//		this.randomExtract = (boolean) map.get("randomExtract");
 		this.selectable = map.get("selectable") == null ? false : (boolean) map.get("selectable");
 		this.gifts = (List<Gift>) map.get("gifts");
 	}
@@ -127,7 +124,7 @@ public class LotteryItem implements ConfigurationSerializable, Cloneable, Compar
 		map.put("soundSet", this.soundSet);
 		map.put("addGiftsLore", this.addGiftsLore);
 		map.put("singleExtract", this.singleExtract);
-		map.put("randomExtract", this.randomExtract);
+//		map.put("randomExtract", this.randomExtract);
 		map.put("selectable", this.selectable);
 		map.put("gifts", this.gifts);
 		return map;
@@ -265,14 +262,6 @@ public class LotteryItem implements ConfigurationSerializable, Cloneable, Compar
 
 	public void setSingleExtract(boolean b) {
 		this.singleExtract = b;
-	}
-
-	public boolean isRandomExtract() {
-		return this.randomExtract;
-	}
-
-	public void setRandomExtract(boolean b) {
-		this.randomExtract = b;
 	}
 
 	public boolean isSelectable() {

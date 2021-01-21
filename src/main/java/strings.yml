@@ -73,7 +73,7 @@ button_set_period_of_use_lore:
 - '&7例: 1991-01-01 12:34:56'
 - '&7目前設定: &3{date}:&d無'
 
-button_set_sound_name: '&6設置抽獎音效&7[非必須]'
+button_set_sound_name: '&6設置全域音效&7[非必須]'
 button_set_sound_lore:
 - '&3&l中鍵&r&7取消使用音效'
 - '&7輸入格式 &b聲音名稱(大小寫無關),音量,音調(音量音調≧0的小數)'
@@ -93,16 +93,10 @@ button_set_single_extract_lore:
 - '&7- 設置（&a綠色羊毛&7）'
 - '&7- 不設置（&c紅色羊毛&7）'
 
-button_set_random_extract_name: '&6是否設置為隨機抽取'
-button_set_random_extract_lore:
-- '&7隨機抽取: 隨機從獎品中機率為100%的物品抽取一樣'
-- '&7- 設置（&a綠色羊毛&7）'
-- '&7- 不設置（&c紅色羊毛&7）'
-
 button_set_selectable_name: '&6是否設置為選擇性抽獎'
 button_set_selectable_lore:
 - '&7玩家可從設置的獎品中任意選擇一樣(無關機率及不會廣播)'
-- '&c&l**請注意若設置此項則"單一抽取"及"隨機抽取"會自動關閉且無法設置'
+- '&c&l**請注意若設置此項則"單一抽取"會自動關閉且無法設置'
 - '&7- 設置（&a綠色羊毛&7）'
 - '&7- 不設置（&c紅色羊毛&7）'
 
@@ -115,6 +109,7 @@ button_edit_gift_lore:
 - '&7獎品數量: &3{amount}'
 - '&7中獎機率: &3{chance}％'
 - '&7全服廣播: {broadcast}'
+- '&7音效: &3{sound}'
 - ''
 - '&d&l任意鍵&r&7編輯'
 - '&a&lShift+右鍵&r&7刪除獎品'
@@ -151,6 +146,14 @@ button_set_gift_broadcast_lore:
 - '&7- 廣播（&a綠色羊毛&7）'
 - '&7- 不廣播（&c紅色羊毛&7）'
 
+button_set_gift_sound_name: '&6設置獎品音效'
+button_set_gift_sound_lore:
+- '&7抽中此獎品的單獨音效(優先於全域音效)'
+- '&3&l中鍵&r&7取消使用音效'
+- '&7輸入格式 &b聲音名稱(大小寫無關),音量,音調(音量音調≧0的小數)'
+- '&7例: BLOCK_ANVIL_PLACE,1,1'
+- '&7目前設定: &3{sound}:&d無'
+
 button_confirm_name: '&a確認'
 button_confirm_lore:
 - '&7若要取消直接關閉頁面即可'
@@ -166,7 +169,6 @@ button_manager_lore:
 - '&7- 抽獎音效: &d{sound}'
 - '&7- 是否添加獎品明細: {addLore_symbol}'
 - '&7- 是否單一抽取: {singleExtract_symbol}'
-- '&7- 是否隨機抽取: {randomExtract_symbol}'
 - '&7- 是否為選擇性獎品: {selectable_symbol}'
 - '&7- 獎品明細:'
 - ' {gifts}'

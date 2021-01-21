@@ -6,6 +6,7 @@ public class Config {
 
 	public static String SETTINGS_PLUGIN_PREFIX;
 	public static int SETTINGS_INPUT_TIME;
+	public static boolean SETTINGS_BATCH_OPEN;
 
 	public static String ITEM_DISPLAY;
 	public static String MONEY_DISPLAY;
@@ -74,9 +75,6 @@ public class Config {
 
 	public static String BUTTON_SET_SINGLE_EXTRACT_NAME;
 	public static List<String> BUTTON_SET_SINGLE_EXTRACT_LORE;
-
-	public static String BUTTON_SET_RANDOM_EXTRACT_NAME;
-	public static List<String> BUTTON_SET_RANDOM_EXTRACT_LORE;
 	
 	public static String BUTTON_SET_SELECTABLE_NAME;
 	public static List<String> BUTTON_SET_SELECTABLE_LORE;
@@ -98,6 +96,9 @@ public class Config {
 
 	public static String BUTTON_SET_GIFT_BROADCAST_NAME;
 	public static List<String> BUTTON_SET_GIFT_BROADCAST_LORE;
+	
+	public static String BUTTON_SET_GIFT_SOUND_NAME;
+	public static List<String> BUTTON_SET_GIFT_SOUND_LORE;
 
 	public static List<String> BUTTON_EDIT_GIFT_LORE;
 

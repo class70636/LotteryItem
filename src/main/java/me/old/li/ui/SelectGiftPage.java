@@ -22,6 +22,7 @@ public class SelectGiftPage extends Page {
 		// TODO Auto-generated constructor stub
 		this.lotteryItem = li;
 		this.sle = sle;
+		this.allCancel = true;
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class SelectGiftPage extends Page {
 					sle.showGiftDisplay(g);
 					// 播放聲音
 					if (sle.getLottery().hasSoundSet())
-						sle.playSound();
+						sle.playSound(sle.getLottery().getSoundSet());
 					// 給物品
 					g.executeGive(p);
 

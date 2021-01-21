@@ -27,24 +27,29 @@ public class LotteryExecuter {
 
 	protected Player p;
 	protected LotteryItem li;
+	protected List<OptionObject> results;
 
 	public LotteryExecuter(Player p, LotteryItem li) {
 		this.p = p;
 		this.li = li.clone();
+		this.results = new ArrayList<>();
 	}
 
 	public boolean execute() {
-		if (!checkFirst())
+		if (checkFirst())
 			return false;
 		// 加入冷卻以及刪除物品
 		if (li.hasCoolDown()) {
 			LICds liCds = Main.liCds.get(p);
 			liCds.addLotteryItem(li.getItemId(), li.getCoolDown());
 		}
+		// 扣除開啟需求物品
 		if (li.hasKey()) {
 			li.getKey().executeRemove(p);
 			showConsumeKey();
 		}
+		// 開始抽獎
+		draw();
 		// 顯示消耗物品
 		showUseDisplay();
 		// 顯示獲得物品
@@ -62,7 +67,7 @@ public class LotteryExecuter {
 
 				if (!current.before(liDeadline)) {
 					Utils.sendPluginMessage(p, Config.LOTTERYITEM_AFTER_DEADLINE);
-					return false;
+					return true;
 				}
 			} catch (Throwable t) {
 				Bukkit.getLogger().log(Level.WARNING, "無法轉換日期", t);
@@ -71,14 +76,14 @@ public class LotteryExecuter {
 		// 檢查冷卻時間
 		if (li.hasCoolDown() && !coolDownYet()) {
 			showCdDisplay();
-			return false;
+			return true;
 		}
 		// 檢查開啟需求
 		if (li.hasKey() && !li.getKey().hasContain(p)) {
 			Utils.sendPluginMessage(p, Config.LOTTERYITEM_NO_KEY);
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	protected boolean coolDownYet() {
@@ -150,56 +155,105 @@ public class LotteryExecuter {
 		this.p.spigot().sendMessage(cb.create());
 	}
 
-	public void showGetDisplay() {
-		List<OptionObject> resultGifts = new ArrayList<>();
-		List<OptionObject> randomModeGifts = new ArrayList<>();
-		// 開始抽獎
-		for (Gift g : li.getGifts()) {
-			if (g.getChance() == 100)
-				g.draw(randomModeGifts);
-			g.draw(resultGifts);
-		}
-		// 沒有抽中任何獎品
-		if (resultGifts.size() == 0) {
-			// 檢查是否有安慰獎
-			if (li.hasConsoPrize()) {
-				resultGifts.add(li.getConsoPrize().clone());
+	protected void draw() {
+		// 是否為單一抽取
+		if (li.isSingleExtract()) {
+			List<Gift> newGifts = new ArrayList<>(li.getGifts());
+			// 機率由小至大排序
+			Utils.sortGifts(newGifts, 2);
+			for (int i = 0; i <= newGifts.size(); i++) {
+				if (results.size() > 0)
+					break;
+				if (i == newGifts.size()) {
+					// 檢查是否有安慰獎
+					if (li.hasConsoPrize())
+						results.add(li.getConsoPrize().clone());
+					else
+						results.add(newGifts.get(i - 1));
+					break;
+				}
+				newGifts.get(i).draw(results);
 			}
+			return;
 		}
+		// 正常抽
+		for (Gift g : li.getGifts())
+			g.draw(results);
+		// 安慰獎
+		if (results.size() == 0 && li.hasConsoPrize())
+			results.add(li.getConsoPrize());
+
+	}
+
+	public void showGetDisplay() {
+//		List<OptionObject> resultGifts = new ArrayList<>();
+//		List<OptionObject> randomModeGifts = new ArrayList<>();
+//		// 開始抽獎
+//		for (Gift g : li.getGifts()) {
+//			if (g.getChance() == 100)
+//				g.draw(randomModeGifts);
+//			g.draw(resultGifts);
+//		}
+//		// 沒有抽中任何獎品
+//		if (resultGifts.size() == 0) {
+//			// 檢查是否有安慰獎
+//			if (li.hasConsoPrize()) {
+//				resultGifts.add(li.getConsoPrize().clone());
+//			}
+//		}
 		// 顯示沒抽到任何物品
-		if (resultGifts.size() == 0) {
+		if (results.size() == 0) {
 			Utils.sendPluginMessage(p, Config.LOTTERYITEM_GET_SHIT);
 			return;
 		}
-		// 隨機選取模式
-		if (li.isRandomExtract()) {
-			for (OptionObject oo : resultGifts) {
-				if (oo instanceof Gift && ((Gift) oo).getChance() == 100)
-					randomModeGifts.add(oo);
-			}
-			resultGifts.removeAll(randomModeGifts);
-			Gift g = (Gift) randomModeGifts.get((int) (Math.random() * randomModeGifts.size()));
-			showGiftDisplay(g);
-			g.executeGive(p);
-			if (g.getBroadcast())
-				broadCastGift(g);
-		}
-		// 顯示所有獎品名字及發送獎勵
-		for (OptionObject o : resultGifts) {
+//		// 隨機選取模式
+//		if (li.isRandomExtract()) {
+//			for (OptionObject oo : resultGifts) {
+//				if (oo instanceof Gift && ((Gift) oo).getChance() == 100)
+//					randomModeGifts.add(oo);
+//			}
+//			resultGifts.removeAll(randomModeGifts);
+//			Gift g = (Gift) randomModeGifts.get((int) (Math.random() * randomModeGifts.size()));
+//			showGiftDisplay(g);
+//			g.executeGive(p);
+//			if (g.getBroadcast())
+//				broadCastGift(g);
+//		}
+//		// 顯示所有獎品名字及發送獎勵
+		for (OptionObject o : results) {
 			showGiftDisplay(o);
 			o.executeGive(p);
-			if (o instanceof Gift && ((Gift) o).getBroadcast())
-				broadCastGift((Gift) o);
-			if (li.isSingleExtract())
-				break;
+			if (o instanceof Gift) {
+				Gift gg = (Gift) o;
+				if (gg.getBroadcast())
+					broadCastGift(gg);
+//				if (gg.hasSoundSet())
+//					playSound(gg.getSound());
+//				else if (li.hasSoundSet())
+//					playSound(li.getSoundSet());
+			}
 		}
-		// 播放聲音
-		if (li.hasSoundSet())
-			playSound();
+
+		// 播放聲音(獎品音效優先於全域音效)
+		for (int i = 0; i <= results.size(); i++) {
+			if (i == results.size()) {
+				if (li.hasSoundSet())
+					playSound(li.getSoundSet());
+				break;
+			}
+			if (results.get(i) instanceof Gift && ((Gift) results.get(i)).hasSoundSet()) {
+				Gift gg = (Gift) results.get(i);
+				playSound(gg.getSound());
+
+				break;
+			}
+		}
+//		if (li.hasSoundSet())
+//			playSound();
 	}
 
-	public void playSound() {
-		String soundSet[] = li.getSoundSet().split(",");
+	public void playSound(String soundStr) {
+		String soundSet[] = soundStr.split(",");
 		String soundName = soundSet[0].toUpperCase();
 
 		Sound sound = Sound.valueOf(soundName);
@@ -240,8 +294,8 @@ public class LotteryExecuter {
 //				Text t = new Text(new BaseComponent[] { new TextComponent(lottery_item_json) });
 //				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, t);
 
-				Item it = new Item("minecraft:" + lottery_item.getType().toString().toLowerCase(), lottery_item.getAmount(),
-						ItemTag.ofNbt(lottery_item_json));
+				Item it = new Item("minecraft:" + lottery_item.getType().toString().toLowerCase(),
+						lottery_item.getAmount(), ItemTag.ofNbt(lottery_item_json));
 				HoverEvent event = new HoverEvent(HoverEvent.Action.SHOW_ITEM, it);
 
 				TextComponent component = new TextComponent(lotteryName);

@@ -14,7 +14,7 @@ public class SelectableLotteryExecuter extends LotteryExecuter {
 
 	@Override
 	public boolean execute() {
-		if (!checkFirst())
+		if (checkFirst())
 			return false;
 		int size = ((li.getGifts().size() - 1) / 9) + 1;
 		SelectGiftPage sgp = new SelectGiftPage(Config.GUI_SELECTABLE_GIFT_TITLE, size, li, this);

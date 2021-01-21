@@ -1,6 +1,6 @@
 name: LotteryItem
 main: me.old.li.Main
-version: 1.6
+version: 1.7
 author: [class70635,xgd]
 softdepend: [Vault,NBTAPI]
 api-version: 1.13

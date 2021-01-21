@@ -6,7 +6,8 @@ settings:
   # 輸入時間(單位:秒)
   # 打字不快的可以調高，或者複製貼上..
   input_time: 20
-
+  #是否開啟批量開啟功能
+  batch_open: false
   
 # ############ 抽獎清單敘述 ############
 # 如果獎品是錢的物品名
@@ -85,14 +86,14 @@ show_item: false
 # 消耗需求物品後的顯示訊息(若不想顯示請將此選項註解(#)掉)
 # {key}: 鑰匙名稱
 # {amount}: 數量
-lotteryItem_consume_key: '&c消耗了&7[&f{key}&r&f × {amount}&7]&c。'
+lotteryItem_consume_key: '&c消耗了&7[&r&f{key}&r&f × {amount}&7]&c。'
 # 開啟抽獎物後顯示的訊息(若不想顯示請將此選項註解(#)掉)
 # {li_name}: 抽獎物名稱
-lotteryItem_use: '&c開啟{li_name}&r&c獲得了裡面的物品。'
+lotteryItem_use: '&c開啟&r&7[&r&f{li_name}&r&7]&r&c獲得了裡面的物品。'
 # 獲得獎品訊息(安慰獎也算在獎品內；若不想顯示請將此選項註解(#)掉)
 # {gift_name}: 獎品名字
 # {amount}: 數量
-lotteryItem_gift_get: '&a獲得了&7[&f{gift_name}&r&f × {amount}&7]。'
+lotteryItem_gift_get: '&a獲得了&7[&r&f{gift_name}&r&f × {amount}&7]。'
 # 沒有獲得任何物品的訊息(若不想顯示請將此選項註解(#)掉)
 lotteryItem_get_shit: '&c什麼也沒抽到...'
 # 全頻廣播訊息
@@ -100,4 +101,4 @@ lotteryItem_get_shit: '&c什麼也沒抽到...'
 # {li_name}: 抽獎物名字
 # {gift_name}: 獎品名字
 # {amount}: 數量
-lotteryItem_broadcast: '&a玩家&7<&f{player}&7>&a在&7[{li_name}&r&7]&a抽中了&7[&f{gift_name}&r&f × {amount}&7]&a。'
+lotteryItem_broadcast: '&a玩家&7<&f{player}&7>&a在&7[&r&f{li_name}&r&7]&a抽中了&7[&r&f{gift_name}&r&f × {amount}&7]&a。'

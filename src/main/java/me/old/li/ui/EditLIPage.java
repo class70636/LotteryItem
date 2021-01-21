@@ -81,7 +81,6 @@ public class EditLIPage extends Page {
 
 		this.setAddGiftsLore();
 		this.setSingleExtractButton();
-		this.setRandomExtractButton();
 		this.setSelectableButton();
 
 		this.setGiftButtons();
@@ -616,39 +615,8 @@ public class EditLIPage extends Page {
 		return ib.getItem();
 	}
 
-	private void setRandomExtractButton() {
-		int slot = 11;
-		new Button(slot) {
-			Button b = this;
-
-			@Override
-			protected void execute(Player p, InventoryClickEvent e) {
-				e.setCancelled(true);
-				if (page.getLotteryItem().isSelectable())
-					return;
-				boolean isRandomExtract = page.getLotteryItem().isRandomExtract();
-				page.getLotteryItem().setRandomExtract(!isRandomExtract);
-
-				b.refresh();
-			}
-
-			@Override
-			protected void setDisplayItem() {
-				this.display = getRandomExtractItem();
-			}
-		};
-	}
-
-	private ItemStack getRandomExtractItem() {
-		ItemBuilder ib = new ItemBuilder();
-		ib.setMaterial(page.getLotteryItem().isRandomExtract() ? Material.LIME_WOOL : Material.RED_WOOL);
-		ib.setName(Config.BUTTON_SET_RANDOM_EXTRACT_NAME);
-		ib.setLore(Config.BUTTON_SET_RANDOM_EXTRACT_LORE);
-		return ib.getItem();
-	}
-
 	private void setSelectableButton() {
-		new Button(12) {
+		new Button(11) {
 			Button b = this;
 
 			@Override
@@ -658,7 +626,6 @@ public class EditLIPage extends Page {
 				page.getLotteryItem().setSelectable(!selectable);
 
 				if (!selectable) {
-					page.getLotteryItem().setRandomExtract(false);
 					page.getLotteryItem().setSingleExtract(false);
 					page.refreshPage();
 				}
@@ -772,7 +739,8 @@ public class EditLIPage extends Page {
 		for (String str : Config.BUTTON_EDIT_GIFT_LORE) {
 			lore.add(str.replace("{type}", g.getReciveName()).replace("{amount}", g.getAmount())
 					.replace("{chance}", g.getChance() + "")
-					.replace("{broadcast}", Utils.getBooleanSymbol(g.getBroadcast())));
+					.replace("{broadcast}", Utils.getBooleanSymbol(g.getBroadcast()))
+					.replace("{sound}", g.hasSoundSet() ? g.getSound() : Utils.getBooleanSymbol(g.hasSoundSet())));
 		}
 		ib.addLore(lore);
 

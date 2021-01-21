@@ -4,8 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -154,54 +152,7 @@ public class LotteryItemBuilder {
 
 	private List<String> getGiftsDisplay() {
 		List<Gift> gifts = new ArrayList<>(li.getGifts());
-		Collections.sort(gifts, new Comparator<Gift>() {
-			@Override
-			public int compare(Gift g1, Gift g2) {
-				int x = (int) (((g2.getChance() - g1.getChance()) * 100000) / 100);
-				int y = (int) (((g1.getChance() - g2.getChance()) * 100000) / 100);
-				int z = g1.getItemName().compareTo(g2.getItemName());
-				double d1 = Double.valueOf(g1.getAmount().split("-")[0]);
-				double d2 = Double.valueOf(g2.getAmount().split("-")[0]);
-				int w = (int) (((d1 - d2) * 100000) / 100);
-
-				if (w == 0) {
-					int l1 = g1.getAmount().split("-").length;
-					int l2 = g2.getAmount().split("-").length;
-					if (l1 != l2)
-						w = l1 - l2;
-					else {
-						d1 = l1 > 1 ? Double.valueOf(g1.getAmount().split("-")[1]) : d1;
-						d2 = l2 > 1 ? Double.valueOf(g2.getAmount().split("-")[1]) : d2;
-						w = (int) (((d1 - d2) * 100000) / 100);
-					}
-				}
-
-				switch (Config.GIFTS_ORDER) {
-				case 1:
-					return x;
-				case 2:
-					return y;
-				case 3:
-					return z;
-				case 4:
-					if (x == 0) {
-						if (z == 0)
-							return w;
-						return z;
-					}
-					return x;
-				case 5:
-					if (y == 0) {
-						if (z == 0)
-							return w;
-						return z;
-					}
-					return y;
-				default:
-					return z;
-				}
-			}
-		});
+		Utils.sortGifts(gifts, Config.GIFTS_ORDER);
 		List<String> lore = new ArrayList<>();
 		for (Gift g : gifts)
 			if (li.isSelectable())
@@ -245,7 +196,6 @@ public class LotteryItemBuilder {
 			temp = temp.replace("{sound}", li.hasSoundSet() ? li.getSoundSet() : Utils.getBooleanSymbol(false));
 			temp = temp.replace("{addLore_symbol}", Utils.getBooleanSymbol(li.isAddGiftsLore()));
 			temp = temp.replace("{singleExtract_symbol}", Utils.getBooleanSymbol(li.isSingleExtract()));
-			temp = temp.replace("{randomExtract_symbol}", Utils.getBooleanSymbol(li.isRandomExtract()));
 			temp = temp.replace("{selectable_symbol}", Utils.getBooleanSymbol(li.isSelectable()));
 
 			lore.add(temp);

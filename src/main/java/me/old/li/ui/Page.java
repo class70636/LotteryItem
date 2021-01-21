@@ -36,12 +36,14 @@ public class Page {
 	protected LotteryItem lotteryItem;
 
 	protected boolean realClose;
+	protected boolean allCancel;
 
 	public Page(String title, int size) {
 		this.previousPage = null;
 		this.goNextPage = false;
 		this.realClose = true;
 		this.inputing = false;
+		this.allCancel = false;
 		this.buttons = new HashMap<>();
 
 		inv = Bukkit.createInventory(null, this.size = size * 9, this.title = title);

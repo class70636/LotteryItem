@@ -49,10 +49,15 @@ public class InventoryManager {
 				return;
 
 			int rawSlot = e.getRawSlot();
-			
+
 			Page page = playerSession.get(p);
 			if (page.buttons.containsKey(rawSlot))
 				page.buttons.get(rawSlot).execute(p, e);
+
+			if (page.allCancel) {
+				e.setCancelled(true);
+				return;
+			}
 
 			if (rawSlot >= p.getOpenInventory().getTopInventory().getSize() && e.isShiftClick()) {
 				e.setCancelled(true);
@@ -71,7 +76,7 @@ public class InventoryManager {
 				return;
 
 			page.onClose(e);
-			
+
 		}
 	}
 

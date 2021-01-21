@@ -26,11 +26,12 @@ public class ServerEvent implements Listener {
 		if (!e.getAction().toString().toLowerCase().startsWith("right"))
 			return;
 		Player p = e.getPlayer();
-		ItemStack handItem = e.getItem();
+		ItemStack oriItem = e.getItem();
+		ItemStack handItem;
 		// Check item not null
-		if (Utils.isNullableItem(handItem))
+		if (Utils.isNullableItem(oriItem))
 			return;
-		handItem = handItem.clone();
+		handItem = oriItem.clone();
 		handItem.setAmount(1);
 		// Check item is a lottery item
 		if (!LIApi.isLotteryItem(handItem))
@@ -48,11 +49,19 @@ public class ServerEvent implements Listener {
 			sle.execute();
 			return;
 		}
-		LotteryExecuter le = new LotteryExecuter(p, li);
-		boolean b = le.execute();
+		// 檢查是否蹲下全開
+		int openCount = 1;
+		if (p.isSneaking() && Config.SETTINGS_BATCH_OPEN)
+			openCount = oriItem.getAmount();
+		for (int i = 1; i <= openCount; i++) {
+			LotteryExecuter le = new LotteryExecuter(p, li);
+			boolean b = le.execute();
+			if (!b)
+				break;
 
-		if (b && !p.hasPermission("lotteryitem.tester"))
-			p.getInventory().removeItem(handItem);
+			if (b && !p.hasPermission("lotteryitem.tester"))
+				p.getInventory().removeItem(handItem);
+		}
 	}
 
 	@EventHandler

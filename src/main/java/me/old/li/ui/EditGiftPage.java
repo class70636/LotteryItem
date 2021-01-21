@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -52,6 +53,7 @@ public class EditGiftPage extends Page {
 		setSetAmountButton();
 		setSetChanceButton();
 		setSetBroadcastButton();
+		setSoundButton();
 
 		this.buttons.forEach((k, v) -> v.refresh());
 	}
@@ -295,6 +297,61 @@ public class EditGiftPage extends Page {
 		ib.setName(Config.BUTTON_SET_GIFT_BROADCAST_NAME);
 		ib.setLore(Config.BUTTON_SET_GIFT_BROADCAST_LORE);
 		return ib.getItem();
+	}
+
+	private Button setSoundButton() {
+		Button b = new Button(4) {
+			Button bb = this;
+
+			@Override
+			protected void execute(Player p, InventoryClickEvent e) {
+				e.setCancelled(true);
+				if (e.getClick() == ClickType.MIDDLE) {
+					gift.setSound(null);
+				} else {
+					new InputHandler(p, page, InputType.SOUND) {
+						@Override
+						boolean setValue(String msg) {
+							String str = msg.toUpperCase();
+							String sound = str.split(",")[0];
+							try {
+								Sound.valueOf(sound);
+							} catch (IllegalArgumentException e) {
+								Utils.sendPluginMessage(p, Config.MESSAGE_NO_SOUND_NAME);
+								return false;
+							}
+							gift.setSound(msg);
+							bb.refresh();
+							return true;
+						}
+					}.enable();
+				}
+				bb.refresh();
+			}
+
+			@Override
+			protected void setDisplayItem() {
+				this.display = getSoundButtonItem();
+			}
+
+		};
+		return b;
+	}
+
+	private ItemStack getSoundButtonItem() {
+		List<String> lore = new ArrayList<>();
+		for (String str : Config.BUTTON_SET_GIFT_SOUND_LORE) {
+			if (str.contains("{sound}")) {
+				if (gift.getSound() != null) {
+					int n = str.indexOf("{sound}");
+					lore.add(str.replace(str.substring(n, str.length()), gift.getSound()));
+				} else
+					lore.add(str.replace("{sound}:", "§r"));
+				continue;
+			}
+			lore.add(str);
+		}
+		return new ItemBuilder(Material.JUKEBOX, Config.BUTTON_SET_GIFT_SOUND_NAME, lore).getItem();
 	}
 
 	private void setKeepButtons() {
