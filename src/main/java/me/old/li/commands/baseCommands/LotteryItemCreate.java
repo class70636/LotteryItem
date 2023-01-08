@@ -11,10 +11,10 @@ import me.old.li.Main;
 import me.old.li.ServerLotteryItems;
 import me.old.li.Utilss.LIApi;
 import me.old.li.Utilss.Utils;
-import me.old.li.commands.BaseCommand;
+import me.old.li.commands.PlayerCommand;
 import me.old.li.ui.EditLIPage;
 
-public class LotteryItemCreate implements BaseCommand {
+public class LotteryItemCreate implements PlayerCommand {
 
 	private Main instance;
 

@@ -5,10 +5,10 @@ import org.bukkit.entity.Player;
 
 import me.old.li.Config;
 import me.old.li.Main;
-import me.old.li.commands.BaseCommand;
+import me.old.li.commands.PlayerCommand;
 import me.old.li.ui.ManagerPage;
 
-public class LotteryItemManager implements BaseCommand {
+public class LotteryItemManager implements PlayerCommand {
 
 	private Main instance;
 

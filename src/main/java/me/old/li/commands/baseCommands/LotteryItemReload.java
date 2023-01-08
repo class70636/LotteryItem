@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import me.old.li.Config;
 import me.old.li.Main;
@@ -18,7 +17,7 @@ public class LotteryItemReload implements BaseCommand {
 
 	@Override
 	public void execute(CommandSender sender, String[] args) {
-		Player p = (Player) sender;
+//		Player p = (Player) sender;
 //		if (!p.hasPermission("lotteryitem.commands.reload")) {
 //			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
 //			return;
@@ -29,37 +28,37 @@ public class LotteryItemReload implements BaseCommand {
 			Utils.loadConfig(Config.class);
 			Saves.reloadConfig();
 			Items.reloadConfig();
-			Utils.sendPluginMessage(p, Config.MESSAGE_RELOAD_SUCCESSFULLY);
+			Utils.sendPluginMessage(sender, Config.MESSAGE_RELOAD_SUCCESSFULLY);
 			Utils.replaceAllPlayerLottery();
 			return;
 		}
 		if (args[1].equalsIgnoreCase("config")) {
 			Main.getInstance().reloadConfig();
 			Utils.loadConfig(Config.class);
-			Utils.sendPluginMessage(p, Config.MESSAGE_RELOAD_SUCCESSFULLY);
+			Utils.sendPluginMessage(sender, Config.MESSAGE_RELOAD_SUCCESSFULLY);
 			Utils.replaceAllPlayerLottery();
 			return;
 		}
 		if (args[1].equalsIgnoreCase("saves")) {
 			Saves.reloadConfig();
-			Utils.sendPluginMessage(p, Config.MESSAGE_RELOAD_SUCCESSFULLY);
+			Utils.sendPluginMessage(sender, Config.MESSAGE_RELOAD_SUCCESSFULLY);
 			Utils.replaceAllPlayerLottery();
 			return;
 		}
 		if (args[1].equalsIgnoreCase("items")) {
 			Items.reloadConfig();
-			Utils.sendPluginMessage(p, Config.MESSAGE_RELOAD_SUCCESSFULLY);
+			Utils.sendPluginMessage(sender, Config.MESSAGE_RELOAD_SUCCESSFULLY);
 			Utils.replaceAllPlayerLottery();
 			return;
 		}
 		if (args[1].equalsIgnoreCase("strings")) {
 			Strings.reloadConfig();
 			Utils.loadConfig(Config.class);
-			Utils.sendPluginMessage(p, Config.MESSAGE_RELOAD_SUCCESSFULLY);
+			Utils.sendPluginMessage(sender, Config.MESSAGE_RELOAD_SUCCESSFULLY);
 			Utils.replaceAllPlayerLottery();
 			return;
 		}
-		showHelp(p);
+		showHelp(sender);
 	}
 
 	@Override

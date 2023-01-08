@@ -59,19 +59,21 @@ public class Command implements CommandExecutor, TabCompleter {
 
 	@Override
 	public boolean onCommand(CommandSender sender, org.bukkit.command.Command cmd, String lable, String[] args) {
-		if (!(sender instanceof Player))
-			return true;
+//		if (!(sender instanceof Player))
+//			return true;
 		if (args.length == 0) {
 			showHelp(sender);
 			return true;
 		}
-		
+
 		String index = args[0].equalsIgnoreCase("m") ? "manager" : args[0].toLowerCase();
 		if (commands.get(index) != null) {
-			Player p = (Player) sender;
-			if (!p.hasPermission("lotteryitem.commands." + index)) {
-				p.sendMessage(Config.MESSAGE_NO_PERMISSION);
-				return true;
+			if (sender instanceof Player) {
+				Player p = (Player) sender;
+				if (!p.hasPermission("lotteryitem.commands." + index)) {
+					p.sendMessage(Config.MESSAGE_NO_PERMISSION);
+					return true;
+				}
 			}
 			commands.get(index).execute(sender, args);
 			return true;
@@ -116,14 +118,19 @@ public class Command implements CommandExecutor, TabCompleter {
 	}
 
 	private void showHelp(CommandSender sender) {
-		Player p = (Player) sender;
-		if (!p.hasPermission("lotteryitem.commands.base")) {
-			p.sendMessage(Config.MESSAGE_NO_PERMISSION);
-			return;
+		if (sender instanceof Player) {
+			Player p = (Player) sender;
+			if (!p.hasPermission("lotteryitem.commands.base")) {
+				p.sendMessage(Config.MESSAGE_NO_PERMISSION);
+				return;
+			}
 		}
 		sender.sendMessage(title);
-		for (BaseCommand bc : commands.values())
+		for (BaseCommand bc : commands.values()) {
+			if ((!(sender instanceof Player)) && (bc instanceof PlayerCommand))
+				continue;
 			sender.sendMessage(ChatColor.translateAlternateColorCodes('&', bc.description()));
+		}
 		sender.sendMessage(String.format(str, instance.getDescription().getVersion()));
 	}
 

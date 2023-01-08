@@ -10,11 +10,11 @@ import me.old.li.Config;
 import me.old.li.LotteryItem;
 import me.old.li.Main;
 import me.old.li.Utilss.Utils;
-import me.old.li.commands.BaseCommand;
+import me.old.li.commands.PlayerCommand;
 import me.old.li.files.Saves;
 import me.old.li.ui.EditLIPage;
 
-public class LotteryItemEdit implements BaseCommand {
+public class LotteryItemEdit implements PlayerCommand {
 
 	private Main instance;
 

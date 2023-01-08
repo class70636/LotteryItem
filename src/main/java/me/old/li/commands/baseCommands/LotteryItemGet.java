@@ -11,10 +11,10 @@ import me.old.li.Config;
 import me.old.li.InputType;
 import me.old.li.LotteryItem;
 import me.old.li.Utilss.Utils;
-import me.old.li.commands.BaseCommand;
+import me.old.li.commands.PlayerCommand;
 import me.old.li.files.Saves;
 
-public class LotteryItemGet implements BaseCommand {
+public class LotteryItemGet implements PlayerCommand {
 
 	public LotteryItemGet() {
 	}
