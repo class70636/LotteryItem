@@ -24,6 +24,7 @@ me\old\li\Main.class
 me\old\li\files\Items.class
 me\old\li\ui\EditGiftPage$5.class
 me\old\li\ui\EditLIPage$2.class
+me\old\li\commands\PlayerCommand.class
 me\old\li\ServerLotteryItems.class
 me\old\li\commands\BaseCommand.class
 me\old\li\ui\EditLIPage$8.class
@@ -84,6 +85,7 @@ me\old\li\ui\EditLIPage$11.class
 me\old\li\ui\EditLIPage$18.class
 me\old\li\ui\EditGiftPage$4$1.class
 me\old\li\Utilss\Utils$1.class
+me\old\li\Utilss\XMaterial$MinecraftVersion.class
 me\old\li\ui\EditLIPage$5.class
 me\old\li\optionObjects\Gift.class
 me\old\li\ui\EditGiftPage$2.class
@@ -92,6 +94,7 @@ me\old\li\ui\EditLIPage$8$1.class
 me\old\li\Utilss\LIApi.class
 me\old\li\files\Saves.class
 me\old\li\Utilss\LICds$1.class
+me\old\li\Utilss\XMaterial.class
 me\old\li\ui\ManagerPage$4$1.class
 me\old\li\Utilss\LotteryExecuter.class
 me\old\li\ui\DeleteConfirmPage.class

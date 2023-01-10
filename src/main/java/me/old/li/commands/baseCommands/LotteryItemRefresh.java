@@ -1,7 +1,6 @@
 package me.old.li.commands.baseCommands;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import me.old.li.Config;
 import me.old.li.Utilss.Utils;
